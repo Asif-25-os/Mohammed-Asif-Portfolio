@@ -119,10 +119,10 @@ function Contact() {
   </div>
 
   <img
-    src="/contact-workspace.png"
-    alt="Workspace with plant, books, notebook and pen"
-    className="contact-workspace-image"
-  />
+  src={`${import.meta.env.BASE_URL}contact-workspace.png`}
+  alt="Workspace with plant, books, notebook and pen"
+  className="contact-workspace.png"
+/>
 </div>
 
         {/* RIGHT FORM */}
