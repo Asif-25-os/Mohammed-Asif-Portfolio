@@ -70,11 +70,10 @@ function About() {
           </div>
 
           <div className="about-photo-card">
-            <img
-              src="/about-profile.png"
-              alt="Mohammed Asif"
-              className="about-image"
-            />
+            <img 
+            src={`${import.meta.env.BASE_URL}about-profile.png`}
+            alt="Mohammed Asif"
+            className="about-image"/>
 
             <div className="about-signature">Mohammed Asif</div>
           </div>
