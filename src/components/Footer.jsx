@@ -1,79 +1,121 @@
+
+import { ArrowUp, ArrowUpRight, Heart } from "lucide-react";
 import {
-  FaLinkedinIn,
   FaGithub,
-  FaKaggle,
+  FaLinkedinIn,
+  FaWhatsapp,
   FaEnvelope,
 } from "react-icons/fa";
 
+const navigation = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Team", href: "#team" },
+  { name: "Contact", href: "#contact" },
+];
+
+const socialLinks = [
+  { name: "GitHub", href: "", Icon: FaGithub },
+  { name: "LinkedIn", href: "", Icon: FaLinkedinIn },
+  { name: "WhatsApp", href: "", Icon: FaWhatsapp },
+  { name: "Email", href: "", Icon: FaEnvelope },
+];
+
 function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
-      <div className="footer-container">
-
-        <div className="footer-top">
-          <div className="footer-brand">
-            <a href="#home" className="footer-logo">
-              <div className="footer-logo-box">MA</div>
-
-              <div>
-                <h3>Mohammed Asif</h3>
-                <p>Data Analyst</p>
-              </div>
+    <footer className="asif-footer">
+      <div className="asif-footer-container">
+        <div className="asif-footer-main">
+          <div className="asif-footer-brand">
+            <a href="#home" className="asif-footer-logo">
+              <span>MA.</span>
+              Mohammed Asif
             </a>
 
-            <p className="footer-description">
-              Turning data into clear insights, meaningful visualizations,
-              and better business decisions.
+            <h2>
+              Let's Create
+              <br />
+              <span>Something Meaningful.</span>
+            </h2>
+
+            <p>
+              Transforming data into insights and ideas
+              into opportunities through analytics,
+              visualization and technology.
             </p>
+
+            <a href="#contact" className="asif-footer-cta">
+              Let's Connect
+              <ArrowUpRight size={18} />
+            </a>
           </div>
 
-          <div className="footer-navigation">
-            <h4>Quick Links</h4>
+          <div className="asif-footer-links">
+            <h3>Quick Links</h3>
 
-            <div className="footer-links">
-              <a href="#home">Home</a>
-              <a href="#about">About</a>
-              <a href="#projects">Projects</a>
-              <a href="#skills">Skills</a>
-              <a href="#contact">Contact</a>
-            </div>
+            <nav aria-label="Footer navigation">
+              {navigation.map((item) => (
+                <a key={item.name} href={item.href}>
+                  {item.name}
+                </a>
+              ))}
+            </nav>
           </div>
 
-          <div className="footer-connect">
-            <h4>Connect</h4>
+          <div className="asif-footer-connect">
+            <h3>Connect With Me</h3>
 
-            <div className="footer-socials">
-              <a href="#" aria-label="LinkedIn" title="LinkedIn">
-                <FaLinkedinIn />
-              </a>
+            <p>
+              Open to collaborations, projects and
+              new opportunities.
+            </p>
 
-              <a href="#" aria-label="GitHub" title="GitHub">
-                <FaGithub />
-              </a>
-
-              <a href="#" aria-label="Kaggle" title="Kaggle">
-                <FaKaggle />
-              </a>
-
-              <a href="mailto:" aria-label="Email" title="Email">
-                <FaEnvelope />
-              </a>
+            <div className="asif-footer-socials">
+              {socialLinks.map(({ name, href, Icon }) =>
+                href ? (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name}
+                    title={name}
+                  >
+                    <Icon size={19} />
+                  </a>
+                ) : (
+                  <span
+                    key={name}
+                    className="asif-footer-social-disabled"
+                    title={`${name} link coming soon`}
+                    aria-label={`${name} link coming soon`}
+                  >
+                    <Icon size={19} />
+                  </span>
+                )
+              )}
             </div>
           </div>
         </div>
 
-        <div className="footer-bottom">
+        <div className="asif-footer-bottom">
           <p>
-            © {currentYear} Mohammed Asif. All rights reserved.
+            © {year} Mohammed Asif. All rights reserved.
           </p>
 
-          <span>
-            Designed for Data • Insights • Impact
-          </span>
-        </div>
+          <p className="asif-footer-made">
+            Designed with <Heart size={14} /> and purpose
+          </p>
 
+          <a href="#home" className="asif-footer-backtop">
+            Back to Top
+            <ArrowUp size={17} />
+          </a>
+        </div>
       </div>
     </footer>
   );

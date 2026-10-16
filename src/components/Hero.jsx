@@ -1,79 +1,206 @@
-import { Download, ArrowRight } from "lucide-react";
+
 import {
-  FaLinkedinIn,
-  FaGithub,
-  FaEnvelope,
-  FaKaggle,
-} from "react-icons/fa";
+  ArrowRight,
+  BarChart3,
+  Database,
+  Mail,
+  Target,
+  Code2,
+  FileSpreadsheet,
+  PieChart,
+  BookOpen,
+} from "lucide-react";
+
+const tools = [
+  { name: "Python", Icon: Code2 },
+  { name: "Excel", Icon: FileSpreadsheet },
+  { name: "Power BI", Icon: BarChart3 },
+  { name: "Tableau", Icon: PieChart },
+  { name: "Jupyter", Icon: BookOpen },
+];
 
 function Hero() {
+  const profileImage =
+    `${import.meta.env.BASE_URL}asif-profile.png`;
+
   return (
-    <section className="hero" id="home">
-      <div className="hero-inner">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            DATA <span>•</span> INSIGHTS <span>•</span> IMPACT
-          </p>
+    <section className="asif-hero" id="home">
+      <div className="asif-hero-container">
 
-          <h1>
-            Turning Data Into
-            <span className="hero-highlight">Business Growth</span>
-          </h1>
+        {/* HERO MAIN CONTENT */}
+        <div className="asif-hero-grid">
 
-          <p className="hero-description">
-            I analyze raw data, uncover meaningful insights, and create
-            interactive dashboards to help businesses make better decisions.
-          </p>
+          {/* LEFT SIDE */}
+          <div className="asif-hero-copy">
 
-          <div className="hero-buttons">
-            <a href="#projects" className="hero-primary">
-              View My Projects
-              <ArrowRight size={17} />
-            </a>
+            <span className="asif-hero-label">
+              <span className="asif-status-dot" />
+              DATA ANALYST
+            </span>
 
-            <a
-              href="/resume.pdf"
-              className="hero-secondary"
-              download
-            >
-              <Download size={17} />
-              Download Resume
-            </a>
+            <h1>
+              Turning
+              <br />
+              Data Into
+              <br />
+              <span>Real Insights.</span>
+            </h1>
+
+            <p>
+              I analyze data, uncover meaningful insights,
+              and create visualizations that help businesses
+              make smarter, data-driven decisions.
+            </p>
+
+            <div className="asif-hero-actions">
+
+              <a
+                className="asif-btn-primary"
+                href="#projects"
+              >
+                <BarChart3 size={19} />
+                View My Projects
+                <ArrowRight size={17} />
+              </a>
+
+              <a
+                className="asif-btn-secondary"
+                href="#contact"
+              >
+                <Mail size={19} />
+                Contact Me
+              </a>
+
+            </div>
+
+            <div className="asif-hero-socials">
+              <span>CONNECT WITH ME</span>
+
+              <div>
+                <a
+                  href="#contact"
+                  aria-label="Contact"
+                  title="Contact"
+                >
+                  <Mail size={19} />
+                </a>
+              </div>
+            </div>
+
           </div>
 
-          <div className="hero-socials">
-            <a
-              href="#"
-              aria-label="LinkedIn"
-              title="LinkedIn"
-            >
-              <FaLinkedinIn />
-            </a>
+          {/* RIGHT SIDE */}
+          <div className="asif-hero-visual">
 
-            <a
-              href="#"
-              aria-label="GitHub"
-              title="GitHub"
-            >
-              <FaGithub />
-            </a>
+            {/* PROFILE IMAGE */}
+            <div className="asif-portrait">
+              
+              <img
+              src={`${import.meta.env.BASE_URL}asif-profile.png`}
+              alt="Mohammed Asif - Data Analyst"
+              className="asif-hero-photo"
+              loading="eager"
+              fetchPriority="high"/>
 
-            <a
-              href="#"
-              aria-label="Kaggle"
-              title="Kaggle"
-            >
-              <FaKaggle />
-            </a>
 
-            <a
-              href="mailto:"
-              aria-label="Email"
-              title="Email"
-            >
-              <FaEnvelope />
-            </a>
+              <div className="asif-portrait-caption">
+                <Target size={20} />
+
+                <div>
+                  <strong>
+                    Data-Driven Decisions
+                  </strong>
+
+                  <small>
+                    From raw data to useful insights
+                  </small>
+                </div>
+              </div>
+
+            </div>
+
+            {/* ANALYTICS CARD */}
+            <div className="asif-insight-panel">
+
+              <div className="asif-panel-heading">
+                <BarChart3 size={18} />
+                <strong>Analytics Focus</strong>
+              </div>
+
+              <div
+                className="asif-chart"
+                aria-hidden="true"
+              >
+                {[35, 48, 43, 64, 72, 90].map(
+                  (height, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        height: `${height}%`,
+                      }}
+                    />
+                  )
+                )}
+              </div>
+
+              <p>
+                Explore trends.
+                Discover opportunities.
+              </p>
+
+              <small>
+                Illustrative chart · Not real project data
+              </small>
+
+            </div>
           </div>
+        </div>
+
+        {/* BOTTOM TECH STRIP */}
+        <div className="asif-hero-bottom">
+
+          <div className="asif-hero-value">
+            <Database size={25} />
+
+            <div>
+              <strong>Data Analysis</strong>
+              <span>
+                Clean · Explore · Understand
+              </span>
+            </div>
+          </div>
+
+          <div className="asif-hero-value">
+            <BarChart3 size={25} />
+
+            <div>
+              <strong>
+                Business Intelligence
+              </strong>
+              <span>
+                Visualize · Report · Improve
+              </span>
+            </div>
+          </div>
+
+          <div className="asif-hero-tools">
+            <strong>Tools I Work With</strong>
+
+            <div className="asif-tools-list">
+
+              {tools.map(({ name, Icon }) => (
+                <div
+                  className="asif-tool"
+                  key={name}
+                >
+                  <Icon size={25} />
+                  <span>{name}</span>
+                </div>
+              ))}
+
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

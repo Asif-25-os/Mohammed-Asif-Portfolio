@@ -1,145 +1,243 @@
+
 import {
-  BarChart3,
-  Users,
-  Workflow,
   ArrowUpRight,
+  BarChart3,
+  Code2,
+  Database,
+  ExternalLink,
+  Target,
+  Search,
+  Lightbulb,
+  TrendingUp,
+  ArrowRight,
 } from "lucide-react";
 
-import { FaGithub } from "react-icons/fa";
 const projects = [
   {
-    id: 1,
-    icon: BarChart3,
-    tag: "E-Commerce Analytics",
+    number: "01",
     title: "E-Commerce Sales & Profitability Analysis",
     description:
-      "Analyzed sales performance, customer buying patterns, peak sales periods, and product profitability to identify business growth opportunities.",
-    tools: ["Python", "Pandas", "Power BI"],
-    impact:
-      "Helped identify top-performing categories, seasonal trends, and areas with lower profitability.",
-    github: "#",
-    live: "#",
+      "Analyzed e-commerce sales data to identify key revenue drivers, profit trends and top-performing product categories using Excel and Power BI.",
+    image: "project-ecommerce.png",
+    tools: ["Excel", "Power BI", "SQL"],
+    projectUrl: "",
+    codeUrl: "",
   },
   {
-    id: 2,
-    icon: Users,
-    tag: "Customer Analytics",
+    number: "02",
     title: "Customer Segmentation — RFM Analysis",
     description:
-      "Segmented customers using Recency, Frequency, and Monetary analysis to understand customer value and purchasing behavior.",
-    tools: ["Python", "SQL", "Excel"],
-    impact:
-      "Created clear customer groups that can support retention, targeting, and personalized marketing strategies.",
-    github: "#",
-    live: "#",
+      "Segmented customers using RFM analysis to understand buying behavior and identify high-value and at-risk customers.",
+    image: "project-rfm.png",
+    tools: ["Python", "Pandas", "Excel", "Seaborn"],
+    projectUrl: "",
+    codeUrl: "",
   },
   {
-    id: 3,
-    icon: Workflow,
-    tag: "Operational Analytics",
-    title: "Operational Workflow Optimization",
+    number: "03",
+    title: "Jarvis DevFlow",
     description:
-      "Studied operational data to identify process bottlenecks, delivery delays, and workflow inefficiencies.",
-    tools: ["Excel", "Power BI", "SQL"],
-    impact:
-      "Highlighted areas where process improvements can reduce delays and improve operational efficiency.",
-    github: "#",
-    live: "#",
+    "An AI-powered software development platform designed to assist and automate stages of the software development lifecycle, from requirements and planning to development, testing and deployment preparation.",
+    image: "project-jarvis-devflow.png",
+    tools: ["AI", "Python", "FastAPI", "React"],
+    projectUrl: "",
+    codeUrl: "",
   },
 ];
 
+const projectWorkflow = [
+  {
+    name: "Collect",
+    detail: "Gather relevant data",
+    Icon: Database,
+  },
+  {
+    name: "Explore",
+    detail: "Understand patterns",
+    Icon: Search,
+  },
+  {
+    name: "Analyze",
+    detail: "Generate insights",
+    Icon: BarChart3,
+  },
+  {
+    name: "Deliver",
+    detail: "Present solutions",
+    Icon: Target,
+  },
+];
+
+function ProjectPreview({ project }) {
+  return (
+    <div className="asif-project-preview">
+      <div className="asif-project-preview-fallback">
+        <BarChart3 size={46} strokeWidth={1.4} />
+        <strong>{project.title}</strong>
+        <span>Dashboard preview coming soon</span>
+      </div>
+
+      <img
+        src={`${import.meta.env.BASE_URL}${project.image}`}
+        alt={`${project.title} dashboard preview`}
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.style.display = "none";
+        }}
+      />
+
+      <span className="asif-project-number">
+        {project.number}
+      </span>
+    </div>
+  );
+}
+
 function Projects() {
   return (
-    <section className="projects-section" id="projects">
-      <div className="projects-container">
-        <div className="projects-heading">
-          <div>
-            <p className="projects-eyebrow">FEATURED PROJECTS</p>
+    <section className="asif-projects" id="projects">
+      <div className="asif-projects-container">
+
+        {/* PROJECTS INTRODUCTION */}
+        <div className="asif-projects-top">
+
+          {/* LEFT CONTENT */}
+          <div className="asif-projects-intro">
+            <span className="asif-projects-label">
+              <span className="asif-projects-dot" />
+              PROJECT PORTFOLIO
+            </span>
 
             <h2>
-              Data Projects With
-              <span> Business Impact</span>
+              Turning Data Into
+              <br />
+              <span>Real-World Solutions.</span>
             </h2>
+
+            <p>
+              I explore real-world problems through
+              data analysis, identify meaningful
+              patterns, and create practical insights
+              that support smarter business decisions.
+            </p>
+
+            <div className="asif-projects-highlights">
+              <div>
+                <Database />
+                <span>
+                  <strong>Explore</strong>
+                  <small>Understand Data</small>
+                </span>
+              </div>
+
+              <div>
+                <BarChart3 />
+                <span>
+                  <strong>Analyze</strong>
+                  <small>Discover Patterns</small>
+                </span>
+              </div>
+
+              <div>
+                <Target />
+                <span>
+                  <strong>Solve</strong>
+                  <small>Deliver Insights</small>
+                </span>
+              </div>
+            </div>
           </div>
 
-          <p className="projects-intro">
-            A selection of analytics projects focused on transforming raw data
-            into meaningful insights, dashboards, and practical business
-            recommendations.
-          </p>
+          {/* RIGHT — PROJECT APPROACH */}
+          <div className="asif-projects-overview">
+            <div className="asif-projects-overview-heading">
+              <BarChart3 />
+              <h3>My Project Approach</h3>
+            </div>
+
+            <div className="asif-projects-overview-steps">
+              {projectWorkflow.map(({ name, detail, Icon }) => (
+                <div key={name}>
+                  <Icon />
+                  <strong>{name}</strong>
+                  <small>{detail}</small>
+                </div>
+              ))}
+            </div>
+
+            <p className="asif-projects-overview-quote">
+              From raw datasets to meaningful insights
+              and practical solutions.
+            </p>
+          </div>
         </div>
 
-        <div className="projects-grid">
-          {projects.map(
-            ({
-              id,
-              icon: Icon,
-              tag,
-              title,
-              description,
-              tools,
-              impact,
-              github,
-              live,
-            }) => (
-              <article className="project-card" key={id}>
-                <div className="project-visual">
-                  <div className="project-visual-top">
-                    <div className="project-icon">
-                      <Icon size={26} strokeWidth={1.8} />
-                    </div>
+        {/* PROJECT CARDS */}
+        <div className="asif-projects-grid">
+          {projects.map((project) => (
+            <article
+              className="asif-project-card"
+              key={project.number}
+            >
+              <ProjectPreview project={project} />
 
-                    <span>{tag}</span>
-                  </div>
+              <div className="asif-project-content">
+                <span className="asif-project-category">
+                  <Database size={14} />
+                  Data Analysis
+                </span>
 
-                  <div className="project-chart-preview">
-                    <div className="chart-bars">
-                      <span style={{ height: "34%" }}></span>
-                      <span style={{ height: "58%" }}></span>
-                      <span style={{ height: "47%" }}></span>
-                      <span style={{ height: "78%" }}></span>
-                      <span style={{ height: "64%" }}></span>
-                      <span style={{ height: "88%" }}></span>
-                    </div>
+                <h3>{project.title}</h3>
 
-                    <div className="chart-line"></div>
-                  </div>
+                <p>{project.description}</p>
+
+                <div className="asif-project-tech">
+                  {project.tools.map((tool) => (
+                    <span key={tool}>
+                      <Code2 size={15} />
+                      {tool}
+                    </span>
+                  ))}
                 </div>
 
-                <div className="project-content">
-                  <span className="project-number">0{id}</span>
-
-                  <h3>{title}</h3>
-
-                  <p className="project-description">{description}</p>
-
-                  <div className="project-tools">
-                    {tools.map((tool) => (
-                      <span key={tool}>{tool}</span>
-                    ))}
-                  </div>
-
-                  <div className="project-impact">
-                    <strong>Business Impact</strong>
-                    <p>{impact}</p>
-                  </div>
-
-                  <div className="project-links">
-                    <a href={github}>
-                      <FaGithub size={16} />
-                      GitHub
-                    </a>
-
-                    <a href={live}>
+                <div className="asif-project-actions">
+                  {project.projectUrl ? (
+                    <a
+                      className="asif-project-primary"
+                      href={project.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       View Project
-                      <ArrowUpRight size={16} />
+                      <ExternalLink size={17} />
                     </a>
-                  </div>
+                  ) : (
+                    <span className="asif-project-primary asif-project-disabled">
+                      Project Link Pending
+                    </span>
+                  )}
+
+                  {project.codeUrl ? (
+                    <a
+                      className="asif-project-secondary"
+                      href={project.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Code
+                      <ArrowUpRight size={17} />
+                    </a>
+                  ) : (
+                    <span className="asif-project-secondary asif-project-disabled">
+                      Code Link Pending
+                    </span>
+                  )}
                 </div>
-              </article>
-            )
-          )}
+              </div>
+            </article>
+          ))}
         </div>
+
       </div>
     </section>
   );

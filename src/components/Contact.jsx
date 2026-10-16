@@ -1,230 +1,310 @@
+
+import { useState } from "react";
+
 import {
   Mail,
-  MapPin,
-  User,
+  Phone,
+  ArrowUpRight,
+  CalendarDays,
+  UserRound,
   FileText,
-  MessageSquare,
+  MessageCircle,
   Send,
-  Lock,
-  ArrowRight,
+  CheckCircle2,
 } from "lucide-react";
 
 import {
-  FaLinkedinIn,
   FaGithub,
+  FaLinkedinIn,
+  FaEnvelope,
   FaWhatsapp,
 } from "react-icons/fa";
 
-const contactItems = [
+// Add Mohammed Asif's verified contact details.
+const contactInfo = {
+  github: "https://github.com/Asif-25-os",
+  linkedin: "https://www.linkedin.com/in/mohammed-asif-a350882b6/",
+  email: "bmd.asif46@gmail.com",
+  whatsapp: "+91 8309492707",
+};
+
+const contactCards = [
   {
-    icon: Mail,
-    title: "Email",
-    text: "Let's discuss your project or opportunity.",
-    href: "mailto:",
-    color: "#1683ff",
+    name: "EMAIL",
+    value: contactInfo.email || "Email to be added",
+    description: "Drop me an email anytime",
+    href: contactInfo.email
+      ? `mailto:${contactInfo.email}`
+      : "",
+    Icon: Mail,
+    type: "email",
   },
   {
-    icon: FaLinkedinIn,
-    title: "LinkedIn",
-    text: "Connect and follow my professional journey.",
-    href: "#",
-    color: "#0A66C2",
+    name: "WHATSAPP",
+    value: contactInfo.whatsapp || "WhatsApp to be added",
+    description: "Chat with me directly",
+    href: contactInfo.whatsapp
+      ? `https://wa.me/${contactInfo.whatsapp.replace(/\D/g, "")}`
+      : "",
+    Icon: Phone,
+    type: "whatsapp",
   },
   {
-    icon: FaGithub,
-    title: "GitHub",
-    text: "Explore my projects and technical work.",
-    href: "#",
-    color: "#111827",
+    name: "LINKEDIN",
+    value: contactInfo.linkedin
+      ? "View LinkedIn Profile"
+      : "LinkedIn to be added",
+    description: "Let's connect professionally",
+    href: contactInfo.linkedin,
+    Icon: FaLinkedinIn,
+    type: "linkedin",
   },
   {
-    icon: FaWhatsapp,
-    title: "WhatsApp",
-    text: "Quick chat for faster communication.",
-    href: "#",
-    color: "#25D366",
+    name: "GITHUB",
+    value: contactInfo.github
+      ? "View GitHub Profile"
+      : "GitHub to be added",
+    description: "Check out my projects",
+    href: contactInfo.github,
+    Icon: FaGithub,
+    type: "github",
   },
 ];
 
 function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const updateField = (event) => {
+    const { name, value } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (!contactInfo.email) {
+      window.alert(
+        "Contact email has not been configured yet."
+      );
+      return;
+    }
+
+    const subject = encodeURIComponent(form.subject);
+
+    const body = encodeURIComponent(
+      `Name: ${form.name}\n` +
+      `Email: ${form.email}\n\n` +
+      `${form.message}`
+    );
+
+    window.location.href =
+      `mailto:${contactInfo.email}?subject=${subject}&body=${body}`;
+  };
+
   return (
-    <section className="contact-section" id="contact">
-      <div className="contact-page-container">
+    <section className="asif-contact" id="contact">
+      <div className="asif-contact-container">
 
-        {/* LEFT SIDE */}
-        <div className="contact-left-panel">
-          <div className="contact-label">
-            <span>CONTACT</span>
-            <div></div>
-          </div>
+        {/* LEFT-ALIGNED CONTACT HEADING */}
+        <div className="asif-contact-header">
+          <span className="asif-contact-label">
+            <span className="asif-contact-dot" />
+            CONTACT
+          </span>
 
-          <h2 className="contact-main-title">
-            Let's Create
-            <span> Something Great</span>
+          <h2>
+            Let's Turn
+            <br />
+            Conversations Into
+            <br />
+            <span>Opportunities.</span>
           </h2>
 
-          <p className="contact-main-description">
-            Have a project in mind, an idea to discuss, or just want to say
-            hello? I'd love to hear from you. Let's connect and explore how
-            we can work together.
+          <p>
+            Have a data analytics project, collaboration
+            idea, or opportunity in mind? Let's connect
+            and explore how meaningful insights can
+            create real value.
           </p>
-
-          <div className="contact-list">
-            {contactItems.map(
-              ({ icon: Icon, title, text, href, color }) => (
-                <a
-                  href={href}
-                  key={title}
-                  className="contact-list-card"
-                >
-                  <div
-                    className="contact-list-icon"
-                    style={{
-                      color: color,
-                      backgroundColor: `${color}12`,
-                    }}
-                  >
-                    <Icon size={24} />
-                  </div>
-
-                  <div className="contact-list-content">
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-
-                  <ArrowRight
-                    size={20}
-                    className="contact-list-arrow"
-                  />
-                </a>
-              )
-            )}
-          </div>
-
-          <div className="contact-location-row">
-            <MapPin size={20} />
-            <div>
-              <strong>Chennai, India</strong>
-              <span>Open to remote opportunities worldwide.</span>
-            </div>
-          </div>
         </div>
 
-        {/* CENTER VISUAL */}
-<div className="contact-center-visual">
-  <div className="contact-impact-text">
-    <span>Ideas</span>
-    <span>To</span>
-    <span>Impact</span>
-  </div>
+        {/* CONTACT MAIN LAYOUT */}
+        <div className="asif-contact-layout">
 
-  <img
-  src={`${import.meta.env.BASE_URL}contact-workspace.png`}
-  alt="Workspace with plant, books, notebook and pen"
-  className="contact-workspace.png"
-/>
-</div>
+          {/* LEFT SIDE */}
+          <div className="asif-contact-left">
 
-        {/* RIGHT FORM */}
-        <div className="contact-form-card">
-          <div className="contact-form-label">
-            <span>SEND A MESSAGE</span>
-            <div></div>
-          </div>
+            {/* CONTACT CARDS */}
+            <div className="asif-contact-cards">
+              {contactCards.map(
+                ({
+                  name,
+                  value,
+                  description,
+                  href,
+                  Icon,
+                  type,
+                }) => (
+                  <div
+                    className="asif-contact-card"
+                    key={name}
+                  >
+                    <div
+                      className={`asif-contact-icon asif-contact-icon-${type}`}
+                    >
+                      <Icon size={30} />
+                    </div>
 
-          <h3>Get In Touch</h3>
+                    <div className="asif-contact-card-info">
+                      <strong>{name}</strong>
+                      <span>{value}</span>
+                      <small>{description}</small>
+                    </div>
 
-          <p className="contact-form-description">
-            Fill out the form and I'll get back to you as soon as possible.
-          </p>
-
-          <form className="contact-form">
-            <div className="contact-form-row">
-              <div className="contact-field">
-                <label>
-                  Your Name <span>*</span>
-                </label>
-
-                <div className="contact-input-wrapper">
-                  <User size={18} />
-                  <input
-                    type="text"
-                    placeholder="Enter your name"
-                  />
-                </div>
-              </div>
-
-              <div className="contact-field">
-                <label>
-                  Your Email <span>*</span>
-                </label>
-
-                <div className="contact-input-wrapper">
-                  <Mail size={18} />
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                  />
-                </div>
-              </div>
+                    {href ? (
+                      <a
+                        href={href}
+                        className="asif-contact-open"
+                        aria-label={`Open ${name}`}
+                        target={
+                          href.startsWith("mailto:")
+                            ? undefined
+                            : "_blank"
+                        }
+                        rel="noopener noreferrer"
+                      >
+                        <ArrowUpRight size={20} />
+                      </a>
+                    ) : (
+                      <span
+                        className="asif-contact-open asif-contact-unavailable"
+                        aria-label={`${name} not configured`}
+                      >
+                        <ArrowUpRight size={20} />
+                      </span>
+                    )}
+                  </div>
+                )
+              )}
             </div>
 
-            <div className="contact-field">
-              <label>
-                Subject <span>*</span>
-              </label>
-
-              <div className="contact-input-wrapper">
-                <FileText size={18} />
-                <input
-                  type="text"
-                  placeholder="What's this about?"
-                />
+            {/* AVAILABILITY CARD */}
+            <div className="asif-contact-availability">
+              <div className="asif-contact-availability-icon">
+                <CalendarDays size={30} />
               </div>
-            </div>
 
-            <div className="contact-field">
-              <label>
-                Message <span>*</span>
-              </label>
+              <div className="asif-contact-availability-info">
+                <strong>AVAILABILITY</strong>
 
-              <div className="contact-textarea-wrapper">
-                <MessageSquare size={18} />
+                <h3>Open to New Opportunities</h3>
 
-                <textarea
-                  rows="6"
-                  placeholder="Type your message here..."
-                ></textarea>
+                <p>
+                  Interested in discussing data analytics,
+                  business intelligence and meaningful
+                  projects.
+                </p>
               </div>
-            </div>
 
-            <button
-              type="submit"
-              className="contact-submit-btn"
-            >
-              Send Message
-              <Send size={18} />
-            </button>
-
-            <div className="contact-privacy">
-              <Lock size={14} />
-              <span>
-                Your information is safe with me. I'll never share it with
-                anyone.
+              <span className="asif-contact-status">
+                <CheckCircle2 size={15} />
+                Let's Connect
               </span>
             </div>
-          </form>
+          </div>
 
-          <div className="contact-quote">
-            <p>
-              “Great ideas start with a simple conversation.”
-            </p>
-            <span>
-              Let's connect and turn ideas into reality.
-            </span>
+          {/* RIGHT SIDE */}
+          <div className="asif-contact-form-card">
+            <div className="asif-contact-form-heading">
+              <div className="asif-contact-form-icon">
+                <Send size={28} />
+              </div>
+
+              <div>
+                <h3>Send a Message</h3>
+
+                <p>
+                  Fill out the form to prepare an email.
+                  Your email app will open to send it.
+                </p>
+              </div>
+            </div>
+
+            {/* MESSAGE FORM */}
+            <form onSubmit={handleSubmit}>
+              <div className="asif-contact-form-row">
+
+                <label className="asif-contact-field">
+                  <UserRound size={20} />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    aria-label="Your Name"
+                    value={form.name}
+                    onChange={updateField}
+                    required
+                  />
+                </label>
+
+                <label className="asif-contact-field">
+                  <Mail size={20} />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    aria-label="Your Email"
+                    value={form.email}
+                    onChange={updateField}
+                    required
+                  />
+                </label>
+              </div>
+
+              <label className="asif-contact-field">
+                <FileText size={20} />
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  aria-label="Subject"
+                  value={form.subject}
+                  onChange={updateField}
+                  required
+                />
+              </label>
+
+              <label className="asif-contact-field asif-contact-textarea">
+                <MessageCircle size={20} />
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  aria-label="Your Message"
+                  value={form.message}
+                  onChange={updateField}
+                  required
+                />
+              </label>
+
+              <button
+                className="asif-contact-submit"
+                type="submit"
+              >
+                <Send size={21} />
+                Prepare Message
+              </button>
+            </form>
           </div>
         </div>
-
       </div>
     </section>
   );
